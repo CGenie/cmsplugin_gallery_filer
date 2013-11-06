@@ -22,4 +22,21 @@ class CMSGalleryPlugin(CMSPluginBase):
         return context
 
 
+class CMSSmartGalleryPlugin(CMSPluginBase):
+
+    model = models.SmartGalleryPlugin
+    inlines = [admin.ContainerInline, ]
+    name = _('Smart Image gallery')
+    render_template = 'cmsplugin_gallery/smart_gallery.html'
+
+    def render(self, context, instance, placeholder):
+        context.update({
+                        'containers': instance.container_set.all(),
+                        'gallery': instance,
+                       })
+        self.render_template = instance.template
+        return context
+
+
 plugin_pool.register_plugin(CMSGalleryPlugin)
+plugin_pool.register_plugin(CMSSmartGalleryPlugin)
