@@ -75,6 +75,7 @@ class SmartGalleryPlugin(CMSPlugin):
                                 choices=TEMPLATE_CHOICES,
                                 default=TEMPLATE_CHOICES[0][0],
                                 editable=len(TEMPLATE_CHOICES) > 1)
+    time_delay = models.PositiveIntegerField(default=5000)
 
     def __unicode__(self):
         return _(u'%(count)d container(s) in gallery') % {'count': self.container_set.count()}
